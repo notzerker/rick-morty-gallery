@@ -1,17 +1,27 @@
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
+const defaultOptions = {
+  query: {
+    fetchPolicy: "no-cache",
+    errorPolicy: "all",
+  },
+};
+
 const client = new ApolloClient({
   uri: "https://rickandmortyapi.com/graphql/",
   cache: new InMemoryCache(),
+  defaultOptions: defaultOptions,
 });
 
 export default async (req, res) => {
-  const search = req.body;
+  const lol = req.body;
+  const lol2 = JSON.parse(lol);
+
   try {
     const { data } = await client.query({
       query: gql`
         query {
-          characters(filter: { name: "${search}" }) {
+          characters(filter: { name: "${lol2.search}", gender: "${lol2.gender}"}) {
             info {
               count
               pages
