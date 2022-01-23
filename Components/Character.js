@@ -18,7 +18,7 @@ const Character = ({ characters }) => {
             />
             <div
               key={character.id}
-              className="w-fit h-fit border-gray-300 border-[1px] rounded-lg overflow-hidden hover:scale-105 shadow-lg transition-all cursor-pointer"
+              className="w-fit h-fit border-light border-[1px] rounded-lg overflow-hidden hover:scale-105 shadow-lg transition-all cursor-pointer"
               onClick={() => setCard(true)}
             >
               <Image

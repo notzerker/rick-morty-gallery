@@ -14,14 +14,14 @@ const client = new ApolloClient({
 });
 
 export default async (req, res) => {
-  const lol = req.body;
-  const lol2 = JSON.parse(lol);
+  const filter = req.body;
+  const filtered = JSON.parse(filter);
 
   try {
     const { data } = await client.query({
       query: gql`
         query {
-          characters(filter: { name: "${lol2.search}", gender: "${lol2.gender}", status: "${lol2.status}"}) {
+          characters(filter: { name: "${filtered.search}", gender: "${filtered.gender}", status: "${filtered.status}"}) {
             info {
               count
               pages

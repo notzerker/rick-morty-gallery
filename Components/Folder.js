@@ -27,7 +27,7 @@ const Folder = ({ name, attributes }) => {
           })}
         </div>
       )}
-      <div className="w-full h-[1px] bg-gray-300 mt-2" />
+      <div className="w-full h-[1px] bg-light mt-2" />
     </div>
   );
 };

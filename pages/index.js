@@ -16,17 +16,15 @@ export default function Home(results) {
   const [characters, setCharacters] = useState(initialState.characters);
   const [error, setError] = useState("");
   const [visible, setVisible] = useState(false);
-
   const gender = useStore((state) => state.gender);
   const setGender = useStore((state) => state.setGender);
-
   const status = useStore((state) => state.status);
   const setStatus = useStore((state) => state.setStatus);
-
   const search = useStore((state) => state.search);
   const setSearch = useStore((state) => state.setSearch);
+  const numCharacters = characters.length;
 
-  const lol = {
+  const filter = {
     search,
     gender,
     status,
@@ -49,11 +47,6 @@ export default function Home(results) {
         name: "Unknown",
         click: () => setGender("unknown"),
       },
-      {
-        id: 4,
-        name: "Genderless",
-        click: () => setGender("genderless"),
-      },
     ],
     [
       {
@@ -74,16 +67,10 @@ export default function Home(results) {
     ],
   ];
 
-  const test = ["hello", "hello"];
-
-  const numCharacters = characters.length;
-
-  const check = () => {};
-
   async function query() {
     const results = await fetch("/api/SearchCharacters", {
       method: "post",
-      body: JSON.stringify(lol),
+      body: JSON.stringify(filter),
     });
     const { characters, error } = await results.json();
     if (error) {
@@ -122,7 +109,7 @@ export default function Home(results) {
                 event.preventDefault();
                 const results = await fetch("/api/SearchCharacters", {
                   method: "post",
-                  body: JSON.stringify(lol),
+                  body: JSON.stringify(filter),
                 });
                 const { characters, error } = await results.json();
                 if (error) {
@@ -134,20 +121,20 @@ export default function Home(results) {
               }}
             >
               <input
-                className="inline border-gray-300 border-[1px] px-4 py-2 rounded-lg focus:drop-shadow-md focus:border-black focus:outline-none"
+                className="inline border-light border-[1px] px-4 py-2 bg-transparent rounded-lg focus:drop-shadow-md focus:border-black focus:outline-none placeholder-black"
                 placeholder="Search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               ></input>
               <button
-                className="cursor-pointer p-3 rounded-md border-gray-300 border-[1px] hover:drop-shadow-md"
+                className="cursor-pointer p-3 rounded-md border-light border-[1px] hover:drop-shadow-md"
                 disabled={search === ""}
                 type="submit"
               >
                 <AiOutlineSearch />
               </button>
               <button
-                className="cursor-pointer p-3 rounded-md border-gray-300 border-[1px]"
+                className="cursor-pointer p-3 rounded-md border-light border-[1px]"
                 form="form"
                 disabled={search === ""}
                 onClick={async () => {
@@ -158,7 +145,7 @@ export default function Home(results) {
                 <AiOutlineClose />
               </button>
             </form>
-            <div className="w-full h-[1px] bg-gray-300 mb-12" />
+            <div className="w-full h-[1px] bg-light mb-12" />
             {/* <h1 className="font-bold text-4xl mb-4">FILTER</h1> */}
             <Folder name="Gender" attributes={attributes[0]} />
             <Folder name="Status" attributes={attributes[1]} />
@@ -168,10 +155,10 @@ export default function Home(results) {
               <h1 className="font-bold text-4xl uppercase inline">
                 Characters{" "}
               </h1>
-              <p className="text-4xl text-gray-300">{"//"}</p>
-              <p className="text-4xl text-gray-300 inline">{numCharacters}</p>
+              <p className="text-4xl text-light">{"//"}</p>
+              <p className="text-4xl text-light inline">{numCharacters}</p>
             </div>
-            <div className="w-full h-[1px] bg-gray-300 mb-12" />
+            <div className="w-full h-[1px] bg-light mb-12" />
             <Character characters={characters} />
           </div>
         </div>

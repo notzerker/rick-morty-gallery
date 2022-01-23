@@ -4,7 +4,7 @@ import React from "react";
 const Card = ({ character, close, visible }) => {
   const Trait = ({ desc, trait }) => {
     return (
-      <div className="flex flex-col rounded-lg w-44 h-12 bg-gray-200 items-start justify-center px-4 shadow-lg">
+      <div className="flex flex-col rounded-lg w-44 h-16 p-2 bg-gray-200 items-start justify-center px-4 shadow-lg">
         <p className="text-gray-500 text-xs">{trait}</p>
         <p className="text-gray-900 text-xs">{desc}</p>
       </div>
@@ -14,11 +14,11 @@ const Card = ({ character, close, visible }) => {
   return (
     <div
       className={`${
-        visible ? "fixed" : "hidden"
+        visible ? "absolute" : "hidden"
       } w-full h-screen bg-gray-300/80 top-0 left-0 z-50 flex items-center justify-center`}
       onClick={close}
     >
-      <div className="w-[64rem] h-[30rem] rounded-lg bg-gray-300 flex flex-row items-center justify-between shadow-lg relative">
+      <div className="w-[64rem] h-[30rem] rounded-lg bg-light flex flex-row items-center justify-between shadow-lg relative">
         <div className="h-[30rem] w-[58rem] relative">
           <Image
             src={character.image}
@@ -28,7 +28,7 @@ const Card = ({ character, close, visible }) => {
         </div>
         <div className="w-full h-full flex flex-col items-center justify-center">
           <p className="font-bold text-3xl">{character.name}</p>
-          <div className="grid grid-cols-2 gap-2 mt-4">
+          <div className="grid grid-cols-2 auto-cols-auto gap-2 mt-4">
             <Trait desc={character.status} trait="Status: " />
             <Trait desc={character.gender} trait="Gender: " />
             <Trait desc={character.id} trait="ID: " />
