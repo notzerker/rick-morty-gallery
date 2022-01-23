@@ -6,7 +6,8 @@ const store = (set) => ({
   setGender: (gender) => set((state) => ({ gender: gender })),
   search: "",
   setSearch: (search) => set((state) => ({ search: search })),
-  lol: {},
+  status: "",
+  setStatus: (status) => set((state) => ({ status: status })),
 });
 
 const useStore = create(devtools(store));

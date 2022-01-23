@@ -6,8 +6,10 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Character from "../Components/Character";
 import Toast from "../Components/Toast";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
-import Test from "../Components/Test";
 import Navbar from "../Components/Navbar";
+import Button from "../Components/Button";
+import Folder from "../Components/Folder";
+import Card from "../Components/Card";
 
 export default function Home(results) {
   const initialState = results;
@@ -18,13 +20,61 @@ export default function Home(results) {
   const gender = useStore((state) => state.gender);
   const setGender = useStore((state) => state.setGender);
 
+  const status = useStore((state) => state.status);
+  const setStatus = useStore((state) => state.setStatus);
+
   const search = useStore((state) => state.search);
   const setSearch = useStore((state) => state.setSearch);
 
   const lol = {
     search,
     gender,
+    status,
   };
+
+  const attributes = [
+    [
+      {
+        id: 1,
+        name: "Male",
+        click: () => setGender("male"),
+      },
+      {
+        id: 2,
+        name: "Female",
+        click: () => setGender("female"),
+      },
+      {
+        id: 3,
+        name: "Unknown",
+        click: () => setGender("unknown"),
+      },
+      {
+        id: 4,
+        name: "Genderless",
+        click: () => setGender("genderless"),
+      },
+    ],
+    [
+      {
+        id: 1,
+        name: "Alive",
+        click: () => setStatus("alive"),
+      },
+      {
+        id: 2,
+        name: "Dead",
+        click: () => setStatus("dead"),
+      },
+      {
+        id: 3,
+        name: "Unknown",
+        click: () => setStatus("unknown"),
+      },
+    ],
+  ];
+
+  const test = ["hello", "hello"];
 
   const numCharacters = characters.length;
 
@@ -46,14 +96,12 @@ export default function Home(results) {
 
   useEffect(() => {
     query();
-  }, [gender]);
-
-  console.log(initialState.info.count);
+  }, [gender, status]);
 
   return (
     <div>
       <Head>
-        <title>Apollo GraphQL</title>
+        <title>Rick & Morty</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -66,10 +114,10 @@ export default function Home(results) {
       {/* <Toast text={error} visisble={visible} set={setVisible} /> */}
       <div className="flex flex-col items-center justify-between mb-4 py-8 ">
         <div className="w-full flex flex-row justify-between items-start px-8">
-          <div className="w-1/4 flex flex-col">
+          <div className="w-1/4 flex flex-col sticky top-32">
             <form
               id="form"
-              className="flex flex-row space-x-2 mb-6"
+              className="flex flex-row space-x-2 mb-[18px]"
               onSubmit={async (event) => {
                 event.preventDefault();
                 const results = await fetch("/api/SearchCharacters", {
@@ -110,15 +158,10 @@ export default function Home(results) {
                 <AiOutlineClose />
               </button>
             </form>
-            <h1 className="font-bold text-4xl mb-4">FILTER</h1>
-            <div className="inline-flex items-center space-x-4">
-              <input type="checkbox" onChange={() => setGender("male")} />
-              <span>Male</span>
-            </div>
-            <div className="inline-flex items-center space-x-4">
-              <input type="checkbox" onChange={() => setGender("female")} />
-              <span>Female</span>
-            </div>
+            <div className="w-full h-[1px] bg-gray-300 mb-12" />
+            {/* <h1 className="font-bold text-4xl mb-4">FILTER</h1> */}
+            <Folder name="Gender" attributes={attributes[0]} />
+            <Folder name="Status" attributes={attributes[1]} />
           </div>
           <div className="w-full px-8">
             <div className="mb-6 flex flex-row space-x-4">
@@ -145,7 +188,7 @@ export async function getStaticProps() {
   const { data } = await client.query({
     query: gql`
       query {
-        characters(page: 42) {
+        characters(page: 1) {
           info {
             count
             pages
@@ -154,6 +197,7 @@ export async function getStaticProps() {
             name
             id
             gender
+            status
             location {
               id
               name
