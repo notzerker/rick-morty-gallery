@@ -6,6 +6,9 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Character from "../Components/Character";
 import Toast from "../Components/Toast";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
+import { BsGenderAmbiguous } from "react-icons/bs";
+import { GiChewedSkull } from "react-icons/gi";
+import { RiAliensFill } from "react-icons/ri";
 import Navbar from "../Components/Navbar";
 import Button from "../Components/Button";
 import Folder from "../Components/Folder";
@@ -22,12 +25,31 @@ export default function Home(results) {
   const setStatus = useStore((state) => state.setStatus);
   const search = useStore((state) => state.search);
   const setSearch = useStore((state) => state.setSearch);
+  const species = useStore((state) => state.species);
+  const setSpecies = useStore((state) => state.setSpecies);
   const numCharacters = characters.length;
+
+  useEffect(() => {
+    async function query() {
+      const results = await fetch("/api/SearchCharacters", {
+        method: "post",
+        body: JSON.stringify(filter),
+      });
+      const { characters, error } = await results.json();
+      if (error) {
+        setError(error);
+      } else {
+        setCharacters(characters);
+      }
+    }
+    query();
+  }, [gender, status, species]);
 
   const filter = {
     search,
     gender,
     status,
+    species,
   };
 
   const attributes = [
@@ -47,6 +69,11 @@ export default function Home(results) {
         name: "Unknown",
         click: () => setGender("unknown"),
       },
+      {
+        id: 4,
+        name: "Genderless",
+        click: () => setGender("genderless"),
+      },
     ],
     [
       {
@@ -65,25 +92,29 @@ export default function Home(results) {
         click: () => setStatus("unknown"),
       },
     ],
+    [
+      {
+        id: 1,
+        name: "Human",
+        click: () => setSpecies("human"),
+      },
+      {
+        id: 2,
+        name: "Alien",
+        click: () => setSpecies("alien"),
+      },
+      {
+        id: 3,
+        name: "Robot",
+        click: () => setSpecies("robot"),
+      },
+      {
+        id: 4,
+        name: "Humanoid",
+        click: () => setSpecies("humanoid"),
+      },
+    ],
   ];
-
-  async function query() {
-    const results = await fetch("/api/SearchCharacters", {
-      method: "post",
-      body: JSON.stringify(filter),
-    });
-    const { characters, error } = await results.json();
-    if (error) {
-      setError(error);
-      setVisible(true);
-    } else {
-      setCharacters(characters);
-    }
-  }
-
-  useEffect(() => {
-    query();
-  }, [gender, status]);
 
   return (
     <div>
@@ -98,7 +129,6 @@ export default function Home(results) {
         />
       </Head>
       <Navbar />
-      {/* <Toast text={error} visisble={visible} set={setVisible} /> */}
       <div className="flex flex-col items-center justify-between mb-4 py-8 ">
         <div className="w-full flex flex-row justify-between items-start px-8">
           <div className="w-1/4 flex flex-col sticky top-32">
@@ -145,10 +175,23 @@ export default function Home(results) {
                 <AiOutlineClose />
               </button>
             </form>
-            <div className="w-full h-[1px] bg-light mb-12" />
+            <div className="w-full h-[1px] bg-light mb-8" />
             {/* <h1 className="font-bold text-4xl mb-4">FILTER</h1> */}
-            <Folder name="Gender" attributes={attributes[0]} />
-            <Folder name="Status" attributes={attributes[1]} />
+            <Folder
+              name="Gender"
+              attributes={attributes[0]}
+              icon={<BsGenderAmbiguous />}
+            />
+            <Folder
+              name="Status"
+              attributes={attributes[1]}
+              icon={<GiChewedSkull />}
+            />
+            <Folder
+              name="Species"
+              attributes={attributes[2]}
+              icon={<RiAliensFill />}
+            />
           </div>
           <div className="w-full px-8">
             <div className="mb-6 flex flex-row space-x-4">
@@ -158,7 +201,11 @@ export default function Home(results) {
               <p className="text-4xl text-light">{"//"}</p>
               <p className="text-4xl text-light inline">{numCharacters}</p>
             </div>
-            <div className="w-full h-[1px] bg-light mb-12" />
+            <div className="w-full h-[1px] bg-light mb-8" />
+            <div className="flex flex-row space-x-2 mb-4 items-center">
+              <p className="uppercase text-base font-bold">Filters</p>
+              <p className="bg-light rounded-lg px-2 py-1 text-[10px]">1</p>
+            </div>
             <Character characters={characters} />
           </div>
         </div>
@@ -185,6 +232,7 @@ export async function getStaticProps() {
             id
             gender
             status
+            species
             location {
               id
               name

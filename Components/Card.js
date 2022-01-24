@@ -14,7 +14,7 @@ const Card = ({ character, close, visible }) => {
   return (
     <div
       className={`${
-        visible ? "absolute" : "hidden"
+        visible ? "fixed" : "hidden"
       } w-full h-screen bg-gray-300/80 top-0 left-0 z-50 flex items-center justify-center`}
       onClick={close}
     >
@@ -34,6 +34,7 @@ const Card = ({ character, close, visible }) => {
             <Trait desc={character.id} trait="ID: " />
             <Trait desc={character.location.name} trait="Location: " />
             <Trait desc={character.origin.name} trait="Origin: " />
+            <Trait desc={character.species} trait="Species: " />
           </div>
         </div>
       </div>

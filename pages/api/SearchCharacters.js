@@ -21,7 +21,7 @@ export default async (req, res) => {
     const { data } = await client.query({
       query: gql`
         query {
-          characters(filter: { name: "${filtered.search}", gender: "${filtered.gender}", status: "${filtered.status}"}) {
+          characters(filter: { name: "${filtered.search}", gender: "${filtered.gender}", status: "${filtered.status}", species: "${filtered.species}"}) {
             info {
               count
               pages
@@ -31,6 +31,7 @@ export default async (req, res) => {
               id
               gender
               status
+              species
               location {
                 id
                 name

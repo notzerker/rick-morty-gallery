@@ -18,19 +18,17 @@ const Character = ({ characters }) => {
             />
             <div
               key={character.id}
-              className="w-fit h-fit border-light border-[1px] rounded-lg overflow-hidden hover:scale-105 shadow-lg transition-all cursor-pointer"
+              className="w-fit h-fit overflow-hidden hover:scale-105 transition-all cursor-pointer"
               onClick={() => setCard(true)}
             >
               <Image
                 src={character.image}
-                className="rounded-t-lg"
+                className="rounded-lg"
                 width="280px"
                 height="280px"
               />
-              <div className="px-4 mt-2 h-12 drop-shadow-2xl">
-                <h2 className="text-sm font-bold text-center">
-                  {character.name}
-                </h2>
+              <div className="px-4 mt-2 h-8 drop-shadow-2xl">
+                <h2 className="text-xs text-center">{character.name}</h2>
               </div>
             </div>
           </>

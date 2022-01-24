@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "./Button";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
-const Folder = ({ name, attributes }) => {
+const Folder = ({ name, attributes, icon }) => {
   const [folder, setFolder] = useState(false);
 
   return (
@@ -11,7 +11,10 @@ const Folder = ({ name, attributes }) => {
         className="w-full flex flex-row items-center justify-between cursor-pointer"
         onClick={() => setFolder(!folder)}
       >
-        <p className="font-bold mb-2">{name}</p>
+        <p className="font-bold mb-2 flex flex-row space-x-2 items-center justify-center">
+          <p>{icon}</p>
+          <p>{name}</p>
+        </p>
         {folder ? <AiOutlineMinus /> : <AiOutlinePlus />}
       </div>
       {folder && (

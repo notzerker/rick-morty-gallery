@@ -8,6 +8,8 @@ const store = (set) => ({
   setSearch: (search) => set((state) => ({ search: search })),
   status: "",
   setStatus: (status) => set((state) => ({ status: status })),
+  species: "",
+  setSpecies: (species) => set((state) => ({ species: species })),
 });
 
 const useStore = create(devtools(store));
