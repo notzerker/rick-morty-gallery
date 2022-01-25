@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useStore from "../Components/Store";
 import Head from "next/head";
 import Image from "next/image";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { ApolloClient, InMemoryCache, gql, split } from "@apollo/client";
 import Character from "../Components/Character";
 import Toast from "../Components/Toast";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
@@ -13,6 +13,7 @@ import Navbar from "../Components/Navbar";
 import Button from "../Components/Button";
 import Folder from "../Components/Folder";
 import Card from "../Components/Card";
+import Label from "../Components/Label";
 
 export default function Home(results) {
   const initialState = results;
@@ -202,9 +203,38 @@ export default function Home(results) {
               <p className="text-4xl text-light inline">{numCharacters}</p>
             </div>
             <div className="w-full h-[1px] bg-light mb-8" />
-            <div className="flex flex-row space-x-2 mb-4 items-center">
-              <p className="uppercase text-base font-bold">Filters</p>
-              <p className="bg-light rounded-lg px-2 py-1 text-[10px]">1</p>
+            <div className="w-full h-8 flex flex-row space-x-4 items-center justify-start mb-4">
+              <div className="flex flex-row space-x-2 items-center">
+                <p className="uppercase font-bold text-dark">Filters</p>
+                <p className="bg-dark rounded-lg px-2 py-1 text-[10px]">0</p>
+              </div>
+              {gender !== "" ? (
+                <Label
+                  title="Gender"
+                  sub={gender}
+                  click={() => setGender("")}
+                />
+              ) : (
+                ""
+              )}
+              {status !== "" ? (
+                <Label
+                  title="Status"
+                  sub={status}
+                  click={() => setStatus("")}
+                />
+              ) : (
+                ""
+              )}
+              {species !== "" ? (
+                <Label
+                  title="Species"
+                  sub={species}
+                  click={() => setSpecies("")}
+                />
+              ) : (
+                ""
+              )}
             </div>
             <Character characters={characters} />
           </div>
