@@ -130,7 +130,7 @@ export default function Home(results) {
         />
       </Head>
       <Navbar />
-      <div className="flex flex-col items-center justify-between mb-4 py-8 ">
+      <div className="flex flex-col items-center justify-between mb-4 py-8">
         <div className="w-full flex flex-row justify-between items-start px-8">
           <div className="w-1/4 flex flex-col sticky top-32">
             <form
@@ -177,22 +177,23 @@ export default function Home(results) {
               </button>
             </form>
             <div className="w-full h-[1px] bg-light mb-8" />
-            {/* <h1 className="font-bold text-4xl mb-4">FILTER</h1> */}
-            <Folder
-              name="Gender"
-              attributes={attributes[0]}
-              icon={<BsGenderAmbiguous />}
-            />
-            <Folder
-              name="Status"
-              attributes={attributes[1]}
-              icon={<GiChewedSkull />}
-            />
-            <Folder
-              name="Species"
-              attributes={attributes[2]}
-              icon={<RiAliensFill />}
-            />
+            <div className="h-[32rem] overflow-scroll flex flex-col">
+              <Folder
+                name="Gender"
+                attributes={attributes[0]}
+                icon={<BsGenderAmbiguous />}
+              />
+              <Folder
+                name="Status"
+                attributes={attributes[1]}
+                icon={<GiChewedSkull />}
+              />
+              <Folder
+                name="Species"
+                attributes={attributes[2]}
+                icon={<RiAliensFill />}
+              />
+            </div>
           </div>
           <div className="w-full px-8">
             <div className="mb-6 flex flex-row space-x-4">
@@ -206,7 +207,6 @@ export default function Home(results) {
             <div className="w-full h-8 flex flex-row space-x-4 items-center justify-start mb-4">
               <div className="flex flex-row space-x-2 items-center">
                 <p className="uppercase font-bold text-dark">Filters</p>
-                <p className="bg-dark rounded-lg px-2 py-1 text-[10px]">0</p>
               </div>
               {gender !== "" ? (
                 <Label

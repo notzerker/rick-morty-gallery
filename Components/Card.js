@@ -6,7 +6,7 @@ const Card = ({ character, visible, close }) => {
     return (
       <div className="flex flex-col rounded-lg w-44 h-16 p-2 bg-light items-start justify-center px-4 shadow-lg">
         <p className="text-gray-500 text-xs">{trait}</p>
-        <p className="text-gray-900 text-xs">{desc}</p>
+        <p className="text-gray-900 text-xs font-bold">{desc}</p>
       </div>
     );
   };
