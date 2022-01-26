@@ -6,11 +6,11 @@ import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 import { BsGenderAmbiguous } from "react-icons/bs";
 import { GiChewedSkull } from "react-icons/gi";
 import { RiAliensFill } from "react-icons/ri";
-import useStore from "../components/Store";
-import Character from "../components/Character";
-import Navbar from "../components/Navbar";
-import Folder from "../components/Folder";
-import Label from "../components/Label";
+import useStore from "../Components/Store";
+import Character from "../Components/Character";
+import Navbar from "../Components/Navbar";
+import Folder from "../Components/Folder";
+import Label from "../Components/Label";
 
 export default function Home(results) {
   const initialState = results;
