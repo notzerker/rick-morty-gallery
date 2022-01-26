@@ -123,7 +123,7 @@ export default function Home(results) {
         <title>Rick & Morty</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
           href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700;800&display=swap"
           rel="stylesheet"

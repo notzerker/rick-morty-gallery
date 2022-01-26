@@ -12,7 +12,6 @@ const Individual = ({ character }) => {
         close={() => setVisible(false)}
       />
       <div
-        key={character.id}
         className="w-fit h-fit overflow-hidden hover:scale-105 transition-all cursor-pointer"
         onClick={() => setVisible(true)}
       >

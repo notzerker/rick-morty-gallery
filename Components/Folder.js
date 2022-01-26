@@ -11,10 +11,10 @@ const Folder = ({ name, attributes, icon }) => {
         className="w-full flex flex-row items-center justify-between cursor-pointer"
         onClick={() => setFolder(!folder)}
       >
-        <p className="font-bold mb-2 flex flex-row space-x-2 items-center justify-center">
+        <div className="font-bold mb-2 flex flex-row space-x-2 items-center justify-center">
           <p>{icon}</p>
           <p>{name}</p>
-        </p>
+        </div>
         {folder ? <AiOutlineMinus /> : <AiOutlinePlus />}
       </div>
       {folder && (

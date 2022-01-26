@@ -7,7 +7,7 @@ const Character = ({ characters }) => {
   return (
     <div className="w-full grid grid-cols-4 gap-6">
       {characters.map((character) => {
-        return <Individual character={character} />;
+        return <Individual character={character} key={character.key} />;
       })}
     </div>
   );
