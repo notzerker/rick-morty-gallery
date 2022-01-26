@@ -174,7 +174,7 @@ export default function Home(results) {
               </button>
             </form>
             <div className="w-full h-[1px] bg-light mb-8" />
-            <div className="h-[32rem] overflow-scroll flex flex-col">
+            <div className="h-[32rem] overflow-y-scroll flex flex-col">
               <Folder
                 name="Gender"
                 attributes={attributes[0]}
