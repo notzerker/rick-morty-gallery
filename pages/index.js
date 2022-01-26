@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import useStore from "../Components/Store";
+import useStore from "../components/Store";
 import Head from "next/head";
 import Image from "next/image";
 import { ApolloClient, InMemoryCache, gql, split } from "@apollo/client";
-import Character from "../Components/Character";
-import Toast from "../Components/Toast";
+import Character from "../components/Character";
+import Toast from "../components/Toast";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 import { BsGenderAmbiguous } from "react-icons/bs";
 import { GiChewedSkull } from "react-icons/gi";
 import { RiAliensFill } from "react-icons/ri";
-import Navbar from "../Components/Navbar";
-import Button from "../Components/Button";
-import Folder from "../Components/Folder";
-import Card from "../Components/Card";
-import Label from "../Components/Label";
+import Navbar from "../components/Navbar";
+import Button from "../components/Button";
+import Folder from "../components/Folder";
+import Card from "../components/Card";
+import Label from "../components/Label";
 
 export default function Home(results) {
   const initialState = results;
